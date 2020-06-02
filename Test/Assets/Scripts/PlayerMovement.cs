@@ -11,24 +11,19 @@ public class PlayerMovement : MonoBehaviour
 
     private float horizontalMove = 0f;
 
+    public int Move;
 
-    private bool jump = false;
+    public Joystick joystick;
+
+    public bool jump = false;
 
 
 
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-        
+        //horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        horizontalMove = joystick.Horizontal * runSpeed;
 
-
-
-
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            jump = true;
-        }
 
 
 
@@ -40,10 +35,16 @@ public class PlayerMovement : MonoBehaviour
     {
         characterController.Move(horizontalMove * Time.fixedDeltaTime, jump);
 
-        
+
 
         jump = false;
-        
+
+    }
+
+
+    public void Jump()
+    {
+        jump = true;
     }
 
 }
